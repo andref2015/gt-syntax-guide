@@ -1054,6 +1054,15 @@ Variables automatically save to CSV files:
 	Third possible item
 ```
 
+**Show ALL questions in random order**
+```guidedtrack
+*randomize: all
+	*question: What is 2+2?
+		*type: number
+	*question: What is 3+3?
+		*type: number
+```
+
 **Re-randomize each time user runs this line of code:**
 ```guidedtrack
 *randomize
@@ -1371,6 +1380,123 @@ This text appears right beneath the button.
 ```
 
 ## Common Reusable Patterns
+
+### Horizontal Progress Bar
+
+```guidedtrack
+-- input: skillScore
+
+*html
+	<style>
+		.percentile-row {
+			display: flex !important;
+			justify-content: space-between !important;
+			align-items: center !important;
+			margin: 0 0 8px 0 !important;
+		}
+		
+		.percentile-label {
+			font-weight: 600 !important;
+			margin: 0 !important;
+			color: #505050 !important;
+			font-size: 18px !important;
+		}
+		
+		.percentile-value {
+			font-weight: 600 !important;
+			color: #0885F8 !important;
+			margin: 0 !important;
+			font-size: 18px !important;
+		}
+		
+		.progress-bar-container {
+			width: 100% !important;
+			height: 16px !important;
+			background-color: #e5e7eb !important;
+			border-radius: 8px !important;
+			margin-bottom: 8px !important;
+		}
+		
+		.progress-bar-fill {
+			height: 100% !important;
+			border-radius: 8px !important;
+		}
+		
+		.progress-fill-green {
+			background-color: #22c55e !important;
+		}
+		
+		.score-value-green {
+			color: #22c55e !important;
+		}
+	</style>
+
+*html
+	<div class="percentile-row">
+		<div class="percentile-label">Your score</div>
+		<div class="percentile-value score-value-green">{skillScore}%</div>
+	</div>
+	<div class="progress-bar-container">
+		<div class="progress-bar-fill progress-fill-green" style="width: {skillScore}%;"></div>
+	</div>
+```
+
+### Row with Icon, Name and Score
+
+```guidedtrack
+-- input: skillScore
+
+*html
+	<style>
+		.skill-row {
+			display: flex !important;
+			align-items: center !important;
+		}
+		
+		.skill-icon-circle {
+			width: 50px !important;
+			height: 50px !important;
+			border-radius: 50% !important;
+			background-color: #22c55e !important;
+			display: flex !important;
+			align-items: center !important;
+			justify-content: center !important;
+			margin-right: 16px !important;
+		}
+		
+		.skill-icon {
+			font-size: 24px !important;
+			color: #ffffff !important;
+		}
+		
+		.skill-title {
+			font-size: 20px !important;
+			font-weight: 600 !important;
+			color: #505050 !important;
+			margin: 0 !important;
+			flex-grow: 1 !important;
+		}
+		
+		.skill-percentage {
+			font-size: 16px !important;
+			font-weight: 600 !important;
+			color: #ffffff !important;
+			background-color: #22c55e !important;
+			padding: 6px 12px !important;
+			border-radius: 20px !important;
+			margin: 0 !important;
+		}
+	</style>
+
+*html
+	<div class="skill-row">
+		<div class="skill-icon-circle">
+			<i class="fas fa-calculator skill-icon"></i>
+		</div>
+		<div class="skill-title">Quantitative Reasoning</div>
+		<div class="skill-percentage">{skillScore}%</div>
+	</div>
+```
 
 ### Clickable Images
 
