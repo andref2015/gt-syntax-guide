@@ -2169,6 +2169,17 @@ To access hundreds of AI models through a single API, use the "Call OpenRouter A
 > - Optional parameters: `temperature`, `max_tokens`  
 > - Defaults: `temperature=0.7`, `max_tokens=1000`  
 
+### APItemplate for Image Generation
+
+For generating beautiful images (e.g., for sharing results on social media), use APItemplate through their API:
+
+**Generate dynamic poster/image:**
+```guidedtrack
+>> poster_link = "https://api.apitemplate.io/template_id/image.png?title.text={user_name}&score.text={final_score}&type.text={personality_type}"
+```
+
+> **Note:** APItemplate allows you to create beautiful, customized images by passing variables through URL parameters. Each template has its own unique ID.
+
 <br>
 
 # Part 7: Best Practices & Reference
