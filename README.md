@@ -1381,6 +1381,67 @@ This text appears right beneath the button.
 
 ## Common Reusable Patterns
 
+### Banner at Top of Report Page
+
+```guidedtrack
+*html
+	<style>
+		.banner-row {
+			display: flex !important;
+			align-items: center !important;
+			margin: 0 0 20px 0 !important;
+			padding: 16px !important;
+			background: linear-gradient(135deg, #0885F8 0%, #1e40af 100%) !important;
+			border-radius: 12px !important;
+			box-shadow: 0 4px 12px rgba(8, 133, 248, 0.2) !important;
+		}
+		.banner-icon {
+			font-size: 32px !important;
+			margin-right: 16px !important;
+			color: #ffffff !important;
+		}
+		.banner-title {
+			font-weight: 600 !important;
+			color: #ffffff !important;
+			margin: 0 !important;
+		}
+    </style>
+
+*html
+	<div class="banner-row">
+		<i class="fas fa-chart-line banner-icon"></i>
+		<h1 class="banner-title">Your Performance</h1>
+	</div>
+```
+
+### Header Row with Icon
+
+```guidedtrack
+*html
+	<style>
+		.section-header-row {
+			display: flex !important;
+			align-items: center !important;
+		}
+		.section-icon {
+			font-size: 28px !important;
+			margin-right: 12px !important;
+			color: #0885F8 !important;
+		}
+		.section-title {
+			font-weight: 600 !important;
+			color: #505050 !important;
+			margin: 0 !important;
+		}
+    </style>
+
+*html
+	<div class="section-header-row">
+		<i class="fas fa-medal section-icon"></i>
+		<h2 class="section-title">Overall Rationality Score</h2>
+	</div>
+```
+
 ### Comparison Table
 
 ```guidedtrack
