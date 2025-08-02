@@ -2291,8 +2291,6 @@ For generating beautiful images (e.g., for sharing results on social media), use
 - **Positly:** A platform to recruit study participants from Mechanical Turk, integrates well with GuidedTrack
 - **Thought Saver:** A flashcard app
 - **Personality Map:** A.I.-generated correlations for millions of personality statements
-
-**Others I'm not involved in:**
 - **UpLift:** A mental wellness app based on cognitive-behavioral therapy (CBT)
 - **Mind Ease:** An app for providing immediate relief from anxiety and panic attacks
 
