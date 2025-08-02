@@ -2064,15 +2064,14 @@ Standard `*images` are not clickable - to make an image clickable, use `*compone
 ```guidedtrack
 >> in_date = calendar::now
 *program: date format parser - andre
+-- outputs:
+-- out_year
+-- out_monthText
+-- out_monthNumeric
+-- out_dayOfMonth
+-- out_date
+-- out_time
 ```
-
-> The above outputs
-- `out_year`
-- `out_monthText`
-- `out_monthNumeric`
-- `out_dayOfMonth`
-- `out_date`
-- `out_time`
 
 ## Charts
 
