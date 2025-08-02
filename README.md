@@ -74,9 +74,9 @@ GuidedTrack is a programming language for creating surveys, experiments, and int
 
 ## Basic Syntax Rules
 
-> **⚠️ CRITICAL RULES**
-> - **ALWAYS use TABS for indentation.** NEVER use spaces for indentation. Incorrect indentation (using spaces) WILL break your program.
-> - **Comments must be on separate lines** starting with `--`. NEVER add comments at the end of code lines - this will break your program. This rule also applies to ALL code examples in this syntax guide - never show inline comments in examples.
+**⚠️ CRITICAL RULES**
+- **ALWAYS use TABS for indentation.** NEVER use spaces for indentation. Incorrect indentation (using spaces) WILL break your program.
+- **Comments must be on separate lines** starting with `--`. NEVER add comments at the end of code lines - this will break your program. This rule also applies to ALL code examples in this syntax guide - never show inline comments in examples.
 
 **Other Important Rules:**
 - Variable names are case-sensitive
@@ -95,7 +95,12 @@ Use comments to organize sections, like the following:
 ----------------------------------
 ```
 
-> **Note:** Inside comments, uppercase words followed by `:` appear orange in the GuidedTrack online code editor
+Inside comments, uppercase words followed by `:` appear orange in the GuidedTrack online code editor
+```guidedtrack
+-- IMPORTANT: WARNING:
+-- Developer X is debugging this page right now, so please don't make edits
+```
+
 
 ## Debugging
 
@@ -136,7 +141,7 @@ Use comments to organize sections, like the following:
 - Not targeting `p` elements for component text styling
 - Not clearing heavy variables from csv after use
 
----
+<br>
 
 # Part 2: Basic Programming
 
@@ -180,7 +185,6 @@ Second line shown after a small line break
 
 **Text formatting:**
 ```guidedtrack
-
 *Bold text*
 /Italic text/
 _Underlined text_
@@ -252,8 +256,8 @@ _Underlined text_
 >> encoded_query = query.encode("URL")
 >> decoded_query = encoded_query.decode("URL")
 ```
-- `encoded_query` is "name=John%20Doe"
-- `decoded_query` is "name=John Doe"
+> `encoded_query` is "name=John%20Doe"<br>
+> `decoded_query` is "name=John Doe"
 
 **String concatenation:**
 ```guidedtrack
@@ -293,7 +297,7 @@ You scored {score} points
 This text only appears after the user clicks the button.
 ```
 
-**CRITICAL: Code after *button only runs when clicked**
+**CRITICAL: Code after `*button` only runs when clicked**
 ```guidedtrack
 *button: Continue
 
@@ -397,7 +401,7 @@ This text appears only after button click.
 ```guidedtrack
 >> keys = person.keys
 ```
-- `{keys}` = 'name, age, sexiness'
+>`{keys}` = 'name, age, sexiness'
 
 **Check if key exists:**
 ```guidedtrack
@@ -487,8 +491,7 @@ This text appears only after button click.
 
 > **Note:** The first check for `out_invalidEmail` exists to avoid linter errors
 
-
----
+<br>
 
 # Part 3: Questions
 
@@ -536,6 +539,8 @@ This text appears only after answering question above.
 > **Allowed icons from:**
 > - fontawesome.com/v5/search?m=free
 > - getbootstrap.com/docs/3.3/components/#glyphicons
+
+<br>
 
 **Picture: show images in answer options:**
 ```guidedtrack
@@ -594,7 +599,7 @@ This text appears only after answering question above.
 	*save: answer
 ```
 
-**Allow multiple *other selections:**
+**Allow multiple `*other` selections:**
 ```guidedtrack
 *question: Favorite flavors? Select all
 	*type: checkbox
@@ -652,7 +657,7 @@ This text appears only after answering question above.
 	*save: data_enjoyment
 ```
 
-**Slider with *min and *max:**
+**Slider with min and max:**
 ```guidedtrack
 *question: Rate from 0-10
 	*type: slider
@@ -661,6 +666,8 @@ This text appears only after answering question above.
 	*save: rating
 ```
 > **Note:** Allows to select every 0.10 digits (0.0, 0.1, 0.2, etc.) because GuidedTrack breaks down scale between min and max by 100
+
+<br>
 
 **Discrete slider with options:**
 ```guidedtrack
@@ -686,6 +693,8 @@ This text appears only after answering question above.
 ```
 > **Note:** `*before` and `*after` add fixed text labels to the left and right of the slider
 
+<br>
+
 **Define an answer scale to use in multiple questions:**
 ```guidedtrack
 >> agreementScale = [["Totally agree", 3], ["Agree", 2], ["Somewhat agree", 1], ["Neither agree nor disagree", 0], ["Somewhat disagree", -1], ["Disagree", -2], ["Totally disagree", -3]]
@@ -699,7 +708,9 @@ This is the encoded answer from your last question: {demoUsefulness}
 
 > **Note:** User will see text options like "Totally agree" etc. but CSV saves encoded variables from -3 to +3
 
-**Example of *after only:**
+<br>
+
+**Example of `*after` only:**
 ```guidedtrack
 *question: How many times have you been arrested?
 	*after: times
@@ -726,7 +737,7 @@ This is the encoded answer from your last question: {demoUsefulness}
 
 ### Important Checkbox Rules
 
-**CRITICAL: Unlike regular multiple-choice type questions, checkbox questions cannot have code indented under options**
+**CRITICAL**: Unlike regular multiple-choice type questions, checkbox questions cannot have code indented under options
 
 **❌ WRONG:**
 ```guidedtrack
@@ -770,6 +781,8 @@ This is the encoded answer from your last question: {demoUsefulness}
 > **Note:** Users can add/remove rows and GuidedTrack saves all entries as an array
 > **CRITICAL:** `*multiple` cannot be combined with `*type` modifiers (checkbox, number, etc.)
 
+<br>
+
 **Searchable dropdown:**
 ```guidedtrack
 *question: Type then select your country
@@ -782,6 +795,7 @@ This is the encoded answer from your last question: {demoUsefulness}
 
 > **Note:** `*searchable` does not allow `*type` configuration
 
+<br>
 
 ## Question Tags and Rules
 
@@ -801,7 +815,7 @@ This is the encoded answer from your last question: {demoUsefulness}
 
 ### Dynamic Question Generation Rules
 
-**CRITICAL: Cannot nest *for loops inside *question blocks to generate options**
+**CRITICAL: Cannot nest `*for` loops inside `*question` blocks to generate options**
 
 **❌ WRONG:**
 ```guidedtrack
@@ -811,7 +825,7 @@ This is the encoded answer from your last question: {demoUsefulness}
 	*save: preferences
 ```
 
-**✅ CORRECT: Build options array first, then use in question as *answers**
+**✅ CORRECT: Build options array first, then use in question as `*answers*`*
 ```guidedtrack
 >> options = []
 *for: animal in types_of_animals
@@ -857,6 +871,8 @@ Variables automatically save to CSV files:
 
 > **Note:** The above creates a column named "Rate {movie}?" with pipe-separated ratings (e.g., "5|3|4"). The "rating" column only shows the last rating since its value gets overwritten in every iteration.
 
+<br>
+
 ### Solution: Create separate columns
 
 ```guidedtrack
@@ -868,6 +884,8 @@ Variables automatically save to CSV files:
 ```
 
 > **Note:** The above creates separate columns: e.g., "rating_Titanic", "rating_Dune", etc.
+
+<br>
 
 ## Throwaway
 
@@ -888,7 +906,7 @@ Variables automatically save to CSV files:
 
 > **Note:** The above will not save data in the 'What's your email?' CSV column, it will only save the 'tempEmail' variable
 
----
+<br>
 
 # Part 4: Flow Control
 
@@ -903,6 +921,8 @@ Variables automatically save to CSV files:
 ```
 
 > **Note:** When using an `*if` statement with an equal sign, make sure the variable being checked exists (otherwise it throws a linter error)
+
+<br>
 
 **String comparisons:**
 ```guidedtrack
@@ -961,7 +981,7 @@ Variables automatically save to CSV files:
 	>> is_correct = 1
 ```
 
-**CRITICAL: No *elif or *else statements exist**
+**CRITICAL: No `*elif` or `*else` statements exist**
 - Use separate `*if` statements instead
 
 ## Navigation
@@ -1083,6 +1103,8 @@ Variables automatically save to CSV files:
 
 > **Note:** Useful to create a page break without `*question`/`*button`, can be surpassed with a `*goto` and a `*label` after the `*wait`
 
+<br>
+
 **Maintain content across pages/questions:**
 ```guidedtrack
 *maintain: These instructions stay visible
@@ -1094,6 +1116,8 @@ Variables automatically save to CSV files:
 ```
 
 > **Note:** Clears all text previously on screen and all `*maintain`
+
+<br>
 
 **Example of clear screen:**
 ```guidedtrack
@@ -1108,7 +1132,7 @@ Now you only see this!
 *progress: 50%
 ```
 
----
+<br>
 
 # Part 5: HTML & CSS
 
@@ -1197,6 +1221,8 @@ All logic (variable assignments with `>>`, `*if` statements, etc.) must be proce
 - Unescaped ampersands (&) in HTML cause "unsafe markup" errors
 - Always escape with `&amp;`
 
+<br>
+
 **❌ WRONG:**
 ```html
 <h3>Quick & Engaging</h3>
@@ -1268,6 +1294,8 @@ All logic (variable assignments with `>>`, `*if` statements, etc.) must be proce
 ```
 
 > **Note:** GuidedTrack automatically adds borders to ALL `*components` - set "border: 0 !important;" to remove
+
+<br>
 
 ## Interactive Components
 
@@ -1453,6 +1481,8 @@ Standard `*images` are not clickable - to make an image clickable, use `*compone
 
 > **Note:** In `*html` components, always use `target="_blank"` to open URLs in new tabs (preferred behavior)
 
+<br>
+
 **Target only a portion of text inside a paragraph:**
 ```guidedtrack
 *html
@@ -1461,6 +1491,7 @@ Standard `*images` are not clickable - to make an image clickable, use `*compone
 
 > **Note:** Use `<span>` to add CSS only to a portion of text inside a paragraph
 
+<br>
 
 ## CSS Best Practices & Troubleshooting
 
@@ -1644,6 +1675,8 @@ Standard `*images` are not clickable - to make an image clickable, use `*compone
 
 > **Note:** Normal paragraph text, written without any HTML, is by default #505050 in GuidedTrack. You do NOT need to always specify colors, GuidedTrack adds colors by default.
 
+<br>
+
 ### Responsive iframe Height
 
 **Toggle the height of iframes:**
@@ -1657,9 +1690,7 @@ Standard `*images` are not clickable - to make an image clickable, use `*compone
 	</style>
 ```
 
-
-
----
+<br>
 
 # Part 6: Advanced Features
 
@@ -1829,6 +1860,8 @@ Optionally, you can also show points like this: {points}
 
 > **Note:** Do NOT add `*button` indented in `*page` (button is added automatically)
 
+<br>
+
 **User login:**
 ```guidedtrack
 *login
@@ -1877,16 +1910,13 @@ To access hundreds of AI models through a single API, use the "Call OpenRouter A
 >> model_for_openrouter = "anthropic/claude-sonnet-4"
 
 *program: Call OpenRouter API
+-- output: response_from_openrouter
 ```
 
-> **Note:**  
 > - Optional parameters: `temperature`, `max_tokens`  
 > - Defaults: `temperature=0.7`, `max_tokens=1000`  
-> - Output: `response_from_openrouter`
 
-
-
----
+<br>
 
 # Part 7: Best Practices & Reference
 
@@ -1941,8 +1971,6 @@ To access hundreds of AI models through a single API, use the "Call OpenRouter A
 - **UpLift:** A mental wellness app based on cognitive-behavioral therapy (CBT)
 - **Mind Ease:** An app for providing immediate relief from anxiety and panic attacks
 
-
-
----
+<br>
 
 # End of Syntax Guide
