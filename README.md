@@ -1381,6 +1381,133 @@ This text appears right beneath the button.
 
 ## Common Reusable Patterns
 
+### Comparison Table
+
+```guidedtrack
+*html
+	<style>
+		.comparison-grid-table {
+			width: 100% !important;
+			box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+			table-layout: fixed !important;
+		}
+		
+		.comparison-grid-table th,
+		.comparison-grid-table td {
+			border: 1px solid #e0e0e0 !important;
+			padding: 10px 5px !important; 
+			text-align: center !important;
+		}
+		
+		.comparison-grid-table th {
+			background-color: #f8f9fa !important;
+			font-weight: bold !important;
+		}
+		
+		 /* Make 1st column wider */
+		.comparison-grid-table th:nth-child(1) {
+			width: 60% !important;
+		}
+		.comparison-grid-table th:nth-child(2), 
+		.comparison-grid-table th:nth-child(3) {
+			width: 20% !important;
+		}
+		
+		.comparison-grid-table tr td:first-child {
+			font-size: 15px !important;
+		}
+		
+		/* Make text smaller on mobile */
+		@media (max-width: 600px) {
+			.comparison-grid-table tr td:first-child {
+				font-size: 13px !important;
+			}
+			.comparison-grid-table {
+				font-size: 14px !important;
+			}
+		}
+	</style>
+
+*html
+	<table class="comparison-grid-table">
+		<thead>
+			<tr>
+				<th>Scenario</th>
+				<th>Your Rating</th>
+				<th>Mean Rating</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Scenario 1</td>
+				<td>5.3</td>
+				<td>6.9</td>
+			</tr>
+			<tr>
+				<td>Scenario 2</td>
+				<td>9.6</td>
+				<td>6.5</td>
+			</tr>
+			<tr>
+				<td>Scenario 3</td>
+				<td>4.2</td>
+				<td>5.5</td>
+			</tr>
+		</tbody>
+	</table>
+```
+
+### Copy to Clipboard Button
+
+```guidedtrack
+To share your results with your friends, click the button below to copy a shareable version of your report to your clipboard:
+
+*html
+	<style>
+		.copy-to-clipboard-button {
+			background-color: #2196f3 !important;
+			padding: 8px 16px !important;
+			margin: 0 !important;
+			border: none !important;
+		}
+		.copy-to-clipboard-button:hover {
+			transition: background-color 0.2s ease !important;
+			background-color: #1976d2 !important;
+		}
+		.copy-to-clipboard-message, .copy-to-clipboard-message-active {
+			margin-right: 0.5em !important;
+		}
+		.copy-to-clipboard-button .copy-to-clipboard-message-active,
+		.copy-to-clipboard-button.is-active .copy-to-clipboard-message {
+			display: none !important;
+		}
+		.copy-to-clipboard-button.is-active .copy-to-clipboard-message-active {
+			display: unset !important;
+		}
+		.copy-to-clipboard-button .fa.fa-clipboard::before {
+			color: white !important;
+		}
+	</style>
+	
+	<button class="copy-to-clipboard-button btn">
+		<span class="copy-to-clipboard-message">
+			Copy your report link
+		</span>
+		<span class="copy-to-clipboard-message-active">
+			Copied!
+		</span>
+		<i class="fa fa-clipboard"></i>
+	</button>
+
+>> payload = {}
+>> payload["button"] = ".copy-to-clipboard-button"
+>> payload["classes_active"] = ["is-active"]
+>> payload["text"] = reportLinkShareable
+
+*trigger: create-copy-to-clipboard-button
+	*send: payload
+```
+
 ### Horizontal Progress Bar
 
 ```guidedtrack
