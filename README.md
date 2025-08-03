@@ -771,6 +771,29 @@ This is the encoded answer from your last question: {demoUsefulness}
 	Option B
 ```
 
+**Ranking (allows users to drag and drop items to rank them):**
+```guidedtrack
+*question: Rank these creatures from best to worst
+	*type: ranking
+	Tigers
+	Bears
+	Pigs
+	Dragons
+	*save: creature_ranking
+```
+
+**Another ranking example:**
+```guidedtrack
+*question: Rank these creatures from best to worst
+	*type: ranking
+	Tigers
+	Bears
+	Pigs
+	Dragons
+```
+
+> **Note:** Users can drag and drop the options to reorder them. GuidedTrack saves the result as an array in the user's preferred order.
+
 **Multiple text inputs (allows users to enter multiple responses, one per row):**
 ```guidedtrack
 *question: List your hobbies
