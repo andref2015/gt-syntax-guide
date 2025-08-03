@@ -777,6 +777,26 @@ This is the encoded answer from your last question: {demoUsefulness}
 	>> creative_score = creative_score + 1
 ```
 
+**Question validation (ensuring exactly 2 selections):**
+```guidedtrack
+*label: vocab_question
+*question: Select the *two* words that have the most similar meaning to each other:
+	*type: checkbox
+	*answers: ["Follower", "Gorge", "Companion", "Acolyte", "Leader"]
+	*save: vocab_answer
+
+*if: not vocab_answer.size = 2
+	Please select exactly two words. Let's try again.
+	*goto: vocab_question
+
+*if: "Follower" in vocab_answer and "Acolyte" in vocab_answer
+	>> vocabulary_score = 1
+	Correct!
+*if: not ("Follower" in vocab_answer and "Acolyte" in vocab_answer)
+	>> vocabulary_score = 0
+	Incorrect. The correct pair was Follower and Acolyte.
+```
+
 **Show checkbox question with options already pre-selected:**
 ```guidedtrack
 *question: Which options do you want? Unselect those you don't want:
