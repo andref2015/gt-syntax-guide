@@ -2175,6 +2175,36 @@ Standard `*images` are not clickable - to make an image clickable, use `*compone
 *navigation: hide
 ```
 
+**Toggle content with navigation menu:**
+```guidedtrack
+-- Initialize state variable
+>> showRules = "no"
+
+*label: questionPage
+
+*if: showRules = "no"
+	*navigation
+		Show Rules
+			*icon: fa-info-circle
+			>> showRules = "yes"
+			*goto: questionPage
+*if: showRules = "yes"
+	*navigation
+		Hide Rules
+			*icon: fa-times-circle
+			>> showRules = "no"
+			*goto: questionPage
+	
+	-- The rules are only displayed when showRules is "yes"
+	*header: Language Rules
+	*list
+		Rule 1: ...
+		Rule 2: ...
+
+*question: What is the correct translation?
+	*save: answer
+```
+
 ## Back Button & Points
 
 **Enable back button (go back to previous question):**
