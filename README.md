@@ -491,6 +491,21 @@ This text appears only after button click.
 
 > **Note:** The first check for `out_invalidEmail` exists to avoid linter errors
 
+**Sort names and values:**
+```guidedtrack
+-- Enter the collection of names to sort
+>> in_namesToSort = ["Alice", "Bob", "Charlie", "David"]
+-- Enter the collection of values to sort by
+>> in_valuesToSortBy = [45, 16, 98, 34]
+-- OPTIONAL: Set to "yes" to sort from lowest to highest (default is highest to lowest)
+>> in_sortAscending = "no"
+
+*program: sort names and values - public
+-- outputs:
+-- out_sortedNames
+-- out_sortedValues
+```
+
 <br>
 
 # Part 3: Questions
@@ -780,16 +795,6 @@ This is the encoded answer from your last question: {demoUsefulness}
 	Pigs
 	Dragons
 	*save: creature_ranking
-```
-
-**Another ranking example:**
-```guidedtrack
-*question: Rank these creatures from best to worst
-	*type: ranking
-	Tigers
-	Bears
-	Pigs
-	Dragons
 ```
 
 > **Note:** Users can drag and drop the options to reorder them. GuidedTrack saves the result as an array in the user's preferred order.
