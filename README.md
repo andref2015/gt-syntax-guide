@@ -467,6 +467,20 @@ This text appears only after button click.
 	*return
 ```
 
+Note: it's good practice to document subprogram outputs at the top:
+```guidedtrack
+-- outputs:
+-- iq_q1_correct
+-- iq_q2_correct  
+-- iq_q3_correct
+-- iq_total_correct
+-- iq_percentage_score
+
+-- Question 1: Pattern Recognition
+*question: Which letter continues the pattern?
+	*save: iq_pattern_answer
+```
+
 **Switch vs Program:**
 - `*program`: runs subprogram and returns automatically to parent once subprogram ends
 - `*switch`: permanently switches to another program (no `*return` allowed)
