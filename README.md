@@ -200,6 +200,8 @@ _Underlined text_
 ```
 
 > **Note:** Must add spaces before/after formatting symbols, and no spaces between the symbols and the text they format. Default paragraph line height is 1.8; font-size 16px
+> 
+> **Important:** GuidedTrack uses *one* asterisk on each side for bold text, NOT two like in Markdown
 
 **Basic header:**
 ```guidedtrack
