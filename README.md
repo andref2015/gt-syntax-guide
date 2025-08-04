@@ -95,6 +95,14 @@ Use comments to organize sections, like the following:
 ----------------------------------
 ```
 
+For individual questions or small sections, prefer single-line comments:
+```guidedtrack
+-- Question 1: Pattern Recognition
+*question: What comes after: 2, 3, 4...
+
+-- Question 2: Mathematical reasoning
+```
+
 Inside comments, uppercase words followed by `:` appear orange in the GuidedTrack online code editor
 ```guidedtrack
 -- IMPORTANT: WARNING:
@@ -140,6 +148,7 @@ Inside comments, uppercase words followed by `:` appear orange in the GuidedTrac
 - Forgetting to escape quotes in HTML strings
 - Not targeting `p` elements for component text styling
 - Not clearing heavy variables from csv after use
+- Using `in` operator with strings (only works with collections/dictionaries)
 
 <br>
 
@@ -258,6 +267,42 @@ _Underlined text_
 ```
 > `encoded_query` is "name=John%20Doe"<br>
 > `decoded_query` is "name=John Doe"
+
+**String limitations:**
+The `in` operator only works with arrays and dictionaries, not for checking if a substring exists within a string variable.
+
+❌ WRONG:
+```guidedtrack
+*if: "cat" in "The cat is sleeping"
+	This will cause an error
+```
+
+✅ CORRECT: Convert to collection first, then use "in"
+```guidedtrack
+>> words = response_riddle.split(" ")
+*if: "cat" in words
+	Found the word "cat"
+```
+
+✅ CORRECT: Use conditional logic for substring checking
+```guidedtrack
+*if: response_riddle = "cat"
+	Exact match found
+```
+
+✅ CORRECT: For more flexible text matching, use utility programs:
+```guidedtrack
+>> in_textToEdit = user_input
+>> in_textToReplace = "cat"
+>> in_replacingText = "FOUND"
+*program: replace text - public
+
+*if: not (out_editedText = user_input)
+	-- If text changed, then "cat" was found
+	>> contains_cat = 1
+```
+
+> **Note:** The `in` operator only works with collections/arrays and dictionaries, NOT with strings for substring checking
 
 **String concatenation:**
 ```guidedtrack
