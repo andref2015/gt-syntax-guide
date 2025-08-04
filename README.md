@@ -2350,6 +2350,8 @@ Configure in Settings > Services on GuidedTrack webapp:
 		>> error = it["error"]
 ```
 
+> **CRITICAL:** The `*success` or `*error` keywords cannot have `*goto` indented underneath them. Use variable assignments or other logic instead.
+
 ### OpenRouter API
 
 To access hundreds of AI models through a single API, use the "Call OpenRouter API" subprogram. This requires only 1 API key to access many AI models (from all major providers like OpenAI, Anthropic, Google, xAI, etc.)
