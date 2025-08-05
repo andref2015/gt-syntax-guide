@@ -149,6 +149,7 @@ Inside comments, uppercase words followed by `:` appear orange in the GuidedTrac
 - Not targeting `p` elements for component text styling
 - Not clearing heavy variables from csv after use
 - Using `in` operator with strings (only works with collections/dictionaries)
+- Forgetting that unescaped ampersands (`&`) in `*html` blocks cause "unsafe markup" errors
 
 <br>
 
