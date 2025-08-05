@@ -358,7 +358,7 @@ This text appears only after button click.
 	>> thisCausesError = 1
 ```
 
-> **Important:** While `*button` creates page break, HTML custom buttons do NOT create a page break
+> **Important:** Only `*button` creates a page break. Custom HTML buttons and `*component` buttons do NOT create page breaks - code continues executing immediately after them. If you need a page break after a custom button, add an indefinite `*wait`
 
 ## Collections & Dictionaries
 
@@ -1221,7 +1221,7 @@ Variables automatically save to CSV files:
 *wait
 ```
 
-> **Note:** Useful to create a page break without `*question`/`*button`, can be surpassed with a `*goto` and a `*label` after the `*wait`
+> **Note:** Useful to create a page break without `*question`/`*button`, `*wait` can be surpassed with a `*goto` and a `*label` after the `*wait`
 
 <br>
 
@@ -1431,7 +1431,7 @@ Use `*component` with `*click` (NOT JavaScript!) - you need to define the HTML c
 		>> clicked = 1
 ```
 
-**Example: `*component` button does NOT stop execution**
+**Example: `*component` button does NOT stop execution (no page break)**
 ```guidedtrack
 *html
 	<style>
@@ -1460,6 +1460,25 @@ Use `*component` with `*click` (NOT JavaScript!) - you need to define the HTML c
 
 >> this_runs_immediately = 1
 This text appears right beneath the button.
+
+-- To create a page break after a custom button, add:
+--*wait
+```
+
+**Example: Custom button WITH page break:**
+```guidedtrack
+*component
+	*classes: custom-button
+	Continue
+	*click
+		>> ready_to_continue = 1
+		*goto: afterPage
+
+-- create a page break
+*wait
+
+*label: afterPage
+This text only appears after the custom button is clicked.
 ```
 
 **Component with HTML content:**
