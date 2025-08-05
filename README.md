@@ -1339,7 +1339,8 @@ All logic (variable assignments with `>>`, `*if` statements, etc.) must be proce
 
 **Ampersand escaping:**
 - Unescaped ampersands (&) in HTML cause "unsafe markup" errors
-- Always escape with `&amp;`
+- Always escape with `&amp;` in `*html` blocks
+- **IMPORTANT:** Only use `&amp;` in `*html` blocks. In regular GuidedTrack text, question options, and other non-HTML content, use `&` normally
 
 <br>
 
