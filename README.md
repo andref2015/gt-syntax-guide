@@ -256,6 +256,19 @@ _Underlined text_
 >> cleanedName = userName.clean
 ```
 
+**Access individual characters (1-indexed!):**
+```guidedtrack
+>> word = "Hello"
+>> firstLetter = word[1]
+>> lastLetter = word[word.size]
+```
+
+**Extract substrings using character access:**
+```guidedtrack
+>> phrase = "GuidedTrack"
+>> firstThreeChars = "{phrase[1]}{phrase[2]}{phrase[3]}"
+```
+
 **Split text into a collection:**
 ```guidedtrack
 >> my_text = "Hello World!"
