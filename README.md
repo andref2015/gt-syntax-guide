@@ -742,6 +742,8 @@ This text appears only after answering question above.
 	*save: rating
 ```
 > **Note:** Allows to select every 0.10 digits (0.0, 0.1, 0.2, etc.) because GuidedTrack breaks down scale between min and max by 100
+> 
+> **Important:** `*min` and `*max` tags ONLY work with `*type: slider` questions, NOT with `*type: number`
 
 <br>
 
