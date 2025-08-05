@@ -269,6 +269,8 @@ _Underlined text_
 >> firstThreeChars = "{phrase[1]}{phrase[2]}{phrase[3]}"
 ```
 
+> Note: GuidedTrack does NOT support slice notation with colons (e.g., string[1:3] or array[2:5]). You must access individual elements and concatenate them manually or using a loop.
+
 **Split text into a collection:**
 ```guidedtrack
 >> my_text = "Hello World!"
