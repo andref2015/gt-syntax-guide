@@ -1318,6 +1318,7 @@ All logic (variable assignments with `>>`, `*if` statements, etc.) must be proce
 - Use `*component` with `*classes` for styling containers around GuidedTrack elements
 - Always use `!important` in CSS
 - Cannot add JavaScript (NEVER use `onclick`, `addEventListener`, etc.)
+- CANNOT use variables inside `<style>` blocks** - variables like `{primary_color}` will not work in CSS definitions
 
 **Advanced CSS limitations:**
 - Some properties may get sanitized
@@ -1414,6 +1415,55 @@ All logic (variable assignments with `>>`, `*if` statements, etc.) must be proce
 *image: {imageOfCat}
 ```
 
+### Variable Limitations in CSS
+
+**CRITICAL: Variables do NOT work inside `<style>` blocks**
+
+**✅ GOOD: Variables work in inline styles:**
+```guidedtrack
+>> primary_color = "#ff0000"
+*html
+	<div style="background: {primary_color} !important;">Content</div>
+```
+
+**✅ GOOD: Use static CSS classes + dynamic inline styles:**
+```guidedtrack
+>> primary_color = "#2196f3"
+*html
+	<style>
+		.my-box {
+			color: white !important;
+		}
+	</style>
+*html
+	<div class="my-box" style="background: {primary_color} !important;">Dynamic color box</div>
+```
+
+**❌ BAD: Variables in CSS strings don't work:**
+```guidedtrack
+>> primary_color = "#ff0000"
+>> css_styles = ".my-class { background: {primary_color} !important; }"
+*html
+	<style>
+		{css_styles}
+	</style>
+```
+
+**❌ BAD: Variables directly in `<style>` blocks don't work:**
+```guidedtrack
+>> primary_color = "#ff0000"
+*html
+	<style>
+		.my-class {
+			background: {primary_color} !important;
+		}
+	</style>
+
+*component
+	*classes: my-class
+	Hi
+```
+
 > **Note:** GuidedTrack automatically adds borders to ALL `*components` - set "border: 0 !important;" to remove
 
 <br>
@@ -1449,7 +1499,7 @@ Use `*component` with `*click` (NOT JavaScript!) - you need to define the HTML c
 			font-weight: 500 !important;
 			color: white !important;
 		}
-	</style>
+	a</style>
 
 *component
 	*classes: custom-button
