@@ -140,17 +140,18 @@ Inside comments, uppercase words followed by `:` appear orange in the GuidedTrac
 - Only the user can run/debug programs in the browser
 
 **Common Pitfalls:**
-- Forgetting variables persist but CSS doesn't
+- Forgetting that CSS classes have to be redefined after every page break
 - Using `.length` instead of `.size` for arrays
 - Opening HTML tags in one block, closing in another
 - Using spaces for indentation
 - Adding comments at end of code lines
-- Forgetting to escape quotes in HTML strings
+- Not escaping quotes in HTML strings
 - Not targeting `p` elements for component text styling
 - Not clearing heavy variables from csv after use
 - Using `in` operator with strings (only works with collections/dictionaries)
-- Forgetting that unescaped ampersands (`&`) in `*html` blocks cause "unsafe markup" errors
-- Forgetting that GuidedTrack lacks remainder syntax (NO % operator)
+- Using unescaped ampersands (`&`) in `*html` blocks
+- Using remainder syntax (`%` operator)
+- Using variables inside `<style>` blocks
 
 <br>
 
@@ -1461,7 +1462,7 @@ All logic (variable assignments with `>>`, `*if` statements, etc.) must be proce
 
 ### Variable Limitations in CSS
 
-**CRITICAL: Variables do NOT work inside `<style>` blocks**
+**CRITICAL: Variables do NOT work inside `<style>` blocks with CSS class definitions**
 
 **✅ GOOD: Variables work in inline styles:**
 ```guidedtrack
