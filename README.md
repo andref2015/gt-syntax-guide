@@ -1228,6 +1228,8 @@ Variables automatically save to CSV files:
 *wait: 2.seconds
 ```
 
+> **Note:** Milliseconds are NOT supported. Use `*wait: 0.05.seconds` instead of `*wait: 50.milliseconds`
+
 **Sync data before proceeding (useful at end of Positly surveys):**
 ```guidedtrack
 *wait: data
