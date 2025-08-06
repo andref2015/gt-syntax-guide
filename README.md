@@ -531,13 +531,20 @@ Note: it's good practice to document subprogram outputs at the top:
 
 ## Utility Programs
 
-**Random number between min and max:**
+**Random integer between min and max:**
 ```guidedtrack
 >> in_minValue = 1
 >> in_maxValue = 10
 *program: random integer between min and max - public
 -- output:
 -- out_randomInteger
+```
+
+**Random number between 0 and 1:**
+```guidedtrack
+*program: random number from 0 to 1 - public
+-- output:
+-- out_randomNumber0to1
 ```
 
 **Floor function:**
