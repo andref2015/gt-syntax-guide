@@ -1332,12 +1332,37 @@ All logic (variable assignments with `>>`, `*if` statements, etc.) must be proce
 ```
 
 **CRITICAL: Self-contained HTML blocks**
-- Each `*html` block must be self-contained
-- You CANNOT open tags in one block and close in another
+- EVERY `*html` block must be self-contained
+- You CANNOT open tags in one block and close in another - this will break your program
 - Use `*component` with `*classes` for styling containers around GuidedTrack elements
 - Always use `!important` in CSS
 - Cannot add JavaScript (NEVER use `onclick`, `addEventListener`, etc.)
 - CANNOT use variables inside `<style>` blocks** - variables like `{primary_color}` will not work in CSS definitions
+
+**❌ WRONG - Opening and closing tags in different blocks:**
+```guidedtrack
+*html
+	<div class="container">
+
+*for: item in items
+	*html
+		<p>{item}</p>
+
+*html
+	</div>
+```
+
+**✅ CORRECT - Build HTML string first, then output in one block:**
+```guidedtrack
+>> quote = "%22".decode("url")
+>> html_content = "<div class={quote}container{quote}>"
+*for: item in items
+	>> html_content = "{html_content}<p>{item}</p>"
+>> html_content = "{html_content}</div>"
+
+*html
+	{html_content}
+```
 
 **Advanced CSS limitations:**
 - Some properties may get sanitized
