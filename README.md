@@ -150,6 +150,7 @@ Inside comments, uppercase words followed by `:` appear orange in the GuidedTrac
 - Not clearing heavy variables from csv after use
 - Using `in` operator with strings (only works with collections/dictionaries)
 - Forgetting that unescaped ampersands (`&`) in `*html` blocks cause "unsafe markup" errors
+- Forgetting that GuidedTrack lacks remainder syntax (NO % operator)
 
 <br>
 
@@ -2249,6 +2250,8 @@ Standard `*images` are not clickable - to make an image clickable, use `*compone
 ```guidedtrack
 >> now = calendar::now
 ```
+
+> **Note:** `calendar::now` returns a datetime object directly. There is NO `.value` property - `calendar::now.value` does not exist and will cause an error.
 
 **Time arithmetic:**
 ```guidedtrack
