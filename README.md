@@ -536,12 +536,16 @@ Note: it's good practice to document subprogram outputs at the top:
 >> in_minValue = 1
 >> in_maxValue = 10
 *program: random integer between min and max - public
+-- output:
+-- out_randomInteger
 ```
 
 **Floor function:**
 ```guidedtrack
 >> in_floor = 4.7
 *program: floor - public
+-- output:
+-- out_floor
 ```
 
 **Text replacement:**
@@ -550,6 +554,8 @@ Note: it's good practice to document subprogram outputs at the top:
 >> in_textToReplace = " "
 >> in_replacingText = "_"
 *program: replace text - public
+-- output:
+-- out_editedText
 ```
 
 **Validate emails:**
