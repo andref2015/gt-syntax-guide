@@ -52,6 +52,7 @@ This syntax guide helps AI assistants understand and write GuidedTrack code. If 
 - [Back Button & Points](#back-button--points)
 - [Page & Login](#page--login)
 - [API Calls & Services](#api-calls-&-services)
+- [Custom Services (Lambda Functions)](#custom-services-lambda-functions)
 
 ### Part 7: Best Practices & Reference
 - [Coding Principles](#coding-principles)
@@ -2514,6 +2515,133 @@ For generating beautiful images (e.g., for sharing results on social media), use
 > **Note:** APItemplate allows you to create beautiful, customized images by passing variables through URL parameters. Each template has its own unique ID.
 
 <br>
+
+## Custom Services (Lambda Functions)
+
+### Understanding Services vs Custom Services
+
+GuidedTrack has two distinct types of services:
+
+**Regular Services:** External API endpoints you configure with a URL and headers (like Openrouter API, Airtable, etc.)
+
+**Custom Services:** Your own AWS Lambda functions that you write and control, giving you complete flexibility to write Javascript code, thus allowing you to more easily integrate with any external system.
+
+### Setting Up Custom Services
+
+Custom services are made of:
+- **Name:** Service identifier used in your GuidedTrack code
+- **Environment Variables:** Key-value pairs
+- **JavaScript Code:** Your Lambda function handler
+
+### Creating Routes/Paths
+
+Each custom service can have multiple routes/paths, with independent code for each:
+- You can create multiple paths like `/`, `/average`, `/create`
+- Each path has its own separate Lambda function code
+- **Important:** You cannot have two routes with the same HTTP method AND path (e.g., two GET routes both using `/`)
+
+### Basic Examples
+
+#### Simple GET Request
+
+**GuidedTrack Code:**
+```guidedtrack
+*service: MyCustomService
+	*path: /
+	*method: GET
+	*success
+		>> fetch_success = 1
+		>> response_message = it["message"]
+	*error
+		>> fetch_success = 0
+		>> error_message = it["error"]
+
+*if: fetch_success = 1
+	Response: {response_message}
+```
+
+**Lambda Code:**
+```javascript
+export const handler = async (event) => {
+    return {
+        statusCode: 200,
+        body: JSON.stringify({
+            message: "Hello from Lambda!"
+        })
+    };
+};
+```
+
+#### POST Request with Data Processing
+
+**GuidedTrack Code:**
+```guidedtrack
+>> myNumber = 42
+>> payload = {"number" -> myNumber}
+
+*service: MyCustomService
+	*path: /calculate
+	*method: POST
+	*send: payload
+	*success
+        >> post_success = 1
+		>> result = it["doubled"]
+	*error
+        >> post_success = 0
+		>> error = it["error"]
+```
+
+**Lambda Code:**
+```javascript
+export const handler = async (event) => {
+    const requestBody = JSON.parse(event.body || '{}');
+    let receivedNumber = requestBody.number;
+    
+    let doubledValue = receivedNumber * 2;
+    
+    return {
+        statusCode: 200,
+        body: JSON.stringify({
+            doubled: doubledValue
+        })
+    };
+};
+```
+
+### Key Lambda Response Rules
+
+1. **Status Code:** Return `statusCode: 200` for success (triggers `*success`), 4xx/5xx for errors (triggers `*error`)
+2. **Body:** Must be JSON stringified - GuidedTrack automatically parses it into the `it` variable
+3. **Query Parameters:** Access via `event.queryStringParameters` (e.g., `/?id=123` → `event.queryStringParameters.id`)
+
+### Multiple Paths in One Service
+
+You can organize related operations under a single service with different paths:
+
+**GuidedTrack:**
+```guidedtrack
+-- Get single row
+*service: DatabaseService
+    *path: /?id={rowId}
+    *method: GET
+
+-- Get average of ratings
+*service: DatabaseService
+    *path: /average
+    *method: GET
+
+-- Create new row
+*service: DatabaseService
+    *path: /create
+    *method: POST
+```
+
+Each path would have its own independent Lambda function code configured in the service settings.
+
+### Debugging Tips
+
+- Return debug information during development.
+- Build up complexity gradually: start with hardcoded responses, then add parameter handling, then external API calls
 
 # Part 7: Best Practices & Reference
 
