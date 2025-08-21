@@ -2090,6 +2090,7 @@ Standard `*images` are not clickable - to make an image clickable, use `*compone
 		}
 	</style>
 ```
+Note: You can find the list of all CSS properties embedded in Clearer Thinking pages in [this stylesheet](https://programs.clearerthinking.org/assets/stylesheets/main.cssp). To override a property, you need to use a more specific selector than one in the stylesheet.
 
 ### Working with Quotes in HTML
 
