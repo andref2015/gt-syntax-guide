@@ -4,6 +4,8 @@ GuidedTrack is a strict programming language. Always refer to this guide wheneve
 
 This syntax guide helps AI assistants understand and write GuidedTrack code. If you find errors, better syntax approaches, or new insights about the language, update this guide—but ask the user permission first. 
 
+When this guide is attached, write all code in GuidedTrack unless explicitly asked to use another language.
+
 ## Table of Contents
 
 ### Part 1: Fundamentals
