@@ -342,6 +342,13 @@ The `in` operator only works with arrays and dictionaries, not for checking if a
 
 > **Note:** GuidedTrack lacks remainder syntax (NO % operator)
 
+**Round numbers:**
+```guidedtrack
+>> pi = 3.14159265359
+>> piInteger = pi.round
+>> piFourDecimals = pi.round(4)
+```
+
 **Absolute value:**
 ```guidedtrack
 >> number = -5
