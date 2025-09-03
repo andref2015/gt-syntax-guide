@@ -854,6 +854,66 @@ This is the encoded answer from your last question: {demoUsefulness}
 	*save: selections
 ```
 
+### Best Practice: Encoded Likert Scale Variables
+
+**PREFER: Direct variable encoding in answer options:**
+```guidedtrack
+*question: How much evidence do you have?
+	Very strong evidence
+		>> howMuchEvidenceTheyHave = 4
+	Strong evidence
+		>> howMuchEvidenceTheyHave = 3
+	Some evidence
+		>> howMuchEvidenceTheyHave = 2
+	A little evidence
+		>> howMuchEvidenceTheyHave = 1
+	No evidence
+		>> howMuchEvidenceTheyHave = 0
+```
+
+**AVOID: Using *save with encoded scales:**
+```guidedtrack
+*question: How much evidence do you have?
+	Very strong evidence
+	Strong evidence
+	Some evidence
+	A little evidence
+	No evidence
+	*save: howMuchEvidenceTheyHave
+```
+
+**Why we prefer direct encoding:**
+- Question text is already stored as CSV column name
+- Only use `*save` when variable will be referenced later in program
+- Use `*save` when question is inside `*randomize` block (randomization adds weird chars to column names)
+- Cleaner code with explicit variable assignment
+
+### Best Practice: Response Option in Descreasing Order
+
+**PREFER: Larger quantifiable units first (decreasing order):**
+```guidedtrack
+*question: How often do you exercise?
+	Very often
+	Often
+	Sometimes
+	Rarely
+	Never
+```
+
+**AVOID: Smaller units first (increasing order):**
+```guidedtrack
+*question: How often do you exercise?
+	Never
+	Rarely
+	Sometimes
+	Often
+	Very often
+```
+
+**Why we prefer larger units first:**
+- More intuitive for users (starts with "more" and goes to "less")
+- Follows natural expectation of options appearing in decreasing magnitude
+
 ### Important Checkbox Rules
 
 **CRITICAL**: Unlike regular multiple-choice type questions, checkbox questions cannot have code indented under options
@@ -1028,11 +1088,12 @@ Variables automatically save to CSV files:
 ### Solution: Create separate columns
 
 ```guidedtrack
-*for: movie in movies
-	*question: Rate {movie}?
-		*answers: [1,2,3,4,5]
+*for: item_index in [1,2,3]
+	*question: Rate item {item_index}
 		*save: rating
-	>> data::store("rating_{movie}", rating)
+	
+	-- Create separate columns for each iteration
+	>> data::store("rating_{item_index}", rating)
 ```
 
 > **Note:** The above creates separate columns: e.g., "rating_Titanic", "rating_Dune", etc.
@@ -1180,6 +1241,26 @@ Variables automatically save to CSV files:
 *while: attempts < 3
 	Attempt {attempts}
 	>> attempts = attempts + 1
+```
+
+**Validate user input with retry loop:**
+```guidedtrack
+>> valid_input = 0
+*while: valid_input = 0
+	-- Get input
+	*question: Please enter your age
+		*type: number
+		*save: user_age
+	
+	-- Check validity
+	>> valid_input = 1
+	*if:  user_age < 3 or user_age > 120
+		-- Show error message if not valid
+		Please enter a valid age between 3 and 120.
+		>> valid_input = 0
+
+-- Code continues here after valid input
+Nice! You entered: {user_age}
 ```
 
 **Repeat fixed times:**
@@ -2512,6 +2593,25 @@ To access hundreds of AI models through a single API, use the "Call OpenRouter A
 
 > - Optional parameters: `temperature`, `max_tokens`  
 > - Defaults: `temperature=0.7`, `max_tokens=1000`  
+
+### AI Output Parsing Warning
+
+**CRITICAL**: GuidedTrack has no native JSON parsing. When getting structured data from AI:
+
+1. Request delimited format (e.g., "||" or ",") instead of JSON
+2. Use `.split()` to parse the response
+3. Ideally validate the output structure (check array size)
+4. Ideally use `.clean` on individual elements to remove whitespace
+
+**Example:**
+```guidedtrack
+-- Instead of requesting JSON, ask for delimited output
+>> prompt = "Output 5 animals separated by ||. Output ONLY the items, no other text."
+*program: Call OpenRouter API
+>> items = response_from_openrouter.split("||")
+*if: not (items.size = 5)
+	-- Handle error
+```
 
 ### APItemplate for Image Generation
 
