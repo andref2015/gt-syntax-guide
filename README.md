@@ -1098,6 +1098,20 @@ Variables automatically save to CSV files:
 
 > **Note:** The above creates separate columns: e.g., "rating_Titanic", "rating_Dune", etc.
 
+**Also creates variables you can use immediately in your program**
+
+```guidedtrack
+>> valueOfVar = "Eureka!"
+>> varToStore = "ABC"
+
+>> data::store("{varToStore}_1", valueOfVar)
+
+*if: ABC_1
+	This will be printed! {ABC_1}
+```
+
+> **Note:** `data::store` not only writes to CSV; it also defines a variable with the given name (here `ABC_1`) that is accessible like any other variable for the rest of the run.
+
 <br>
 
 ## Throwaway
